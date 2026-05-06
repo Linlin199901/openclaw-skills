@@ -1,0 +1,100 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Agent Observability Dashboard</title>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+                .card { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+                h1 { color: #333; }
+                .metric { margin: 10px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>🤖 Agent Observability Dashboard</h1>
+            <div class="dashboard">
+                <div class="card">
+                    <h2>📊 总体统计</h2>
+                    <div id="summary"></div>
+                </div>
+                <div class="card">
+                    <h2>📈 性能趋势</h2>
+                    <canvas id="latencyChart"></canvas>
+                </div>
+                <div class="card">
+                    <h2>✅ 成功率</h2>
+                    <canvas id="successChart"></canvas>
+                </div>
+                <div class="card">
+                    <h2>🛠️ 工具使用</h2>
+                    <div id="tools"></div>
+                </div>
+            </div>
+            
+            <script>
+                async function loadData() {
+                    const response = await fetch('/api/metrics?period=24');
+                    const data = await response.json();
+                    
+                    // 更新总体统计
+                    document.getElementById('summary').innerHTML = `
+                        <div class="metric">总调用次数: ${data.summary.total_calls}</div>
+                        <div class="metric">平均成功率: ${data.summary.overall_success_rate.toFixed(1)}%</div>
+                        <div class="metric">平均延迟: ${data.summary.avg_latency.toFixed(1)}ms</div>
+                        <div class="metric">总Token数: ${data.summary.total_tokens}</div>
+                    `;
+                    
+                    // 更新工具使用
+                    let toolsHtml = '<ul>';
+                    data.tool_stats.forEach(tool => {
+                        toolsHtml += `<li>${tool.tool_name}: ${tool.call_count}次调用 (${tool.success_rate.toFixed(1)}% 成功率)</li>`;
+                    });
+                    toolsHtml += '</ul>';
+                    document.getElementById('tools').innerHTML = toolsHtml;
+                    
+                    // 创建图表
+                    createCharts(data.time_series);
+                }
+                
+                function createCharts(timeSeries) {
+                    const labels = timeSeries.map(item => item.hour);
+                    const latencyData = timeSeries.map(item => item.avg_latency);
+                    const successData = timeSeries.map(item => item.success_rate);
+                    
+                    // 延迟图表
+                    new Chart(document.getElementById('latencyChart'), {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '平均延迟 (ms)',
+                                data: latencyData,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        }
+                    });
+                    
+                    // 成功率图表
+                    new Chart(document.getElementById('successChart'), {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: '成功率 (%)',
+                                data: successData,
+                                backgroundColor: 'rgb(54, 162, 235)'
+                            }]
+                        }
+                    });
+                }
+                
+                // 每30秒刷新数据
+                loadData();
+                setInterval(loadData, 30000);
+            </script>
+        </body>
+        </html>
+        

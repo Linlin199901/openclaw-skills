@@ -1,0 +1,134 @@
+# 爆款网剧创作大师配置文件
+
+# 默认设置
+defaults:
+  platform: "douyin"  # 目标平台: douyin, hongguo
+  episodes: 3         # 默认集数
+  genre: "逆袭爽剧"   # 默认题材
+  
+# 输出设置
+output:
+  formats: ["markdown", "json"]  # 输出格式
+  directory: "output"            # 输出目录
+  include_predictions: true      # 是否包含数据预测
+  auto_optimize: true           # 是否自动优化
+  
+# 平台特定设置
+platform_settings:
+  douyin:
+    duration_range: [90, 120]    # 时长范围（秒）
+    shot_duration: 1.2          # 平均镜头时长（秒）
+    golden_time_focus: true     # 重点优化黄金时间
+    key_elements: ["视觉冲击", "快速反转", "爽点密集"]
+    
+  hongguo:
+    duration_range: [150, 180]  # 时长范围（秒）
+    shot_duration: 3.5          # 平均镜头时长（秒）
+    golden_time_focus: true     # 重点优化黄金时间
+    key_elements: ["情感共鸣", "人物深度", "主题深刻"]
+    
+# 题材模板设置
+genre_templates:
+  逆袭爽剧:
+    protagonist_traits: ["坚韧", "智慧", "隐忍"]
+    antagonist_traits: ["傲慢", "虚伪", "势利"]
+    emotional_core: "尊严捍卫"
+    growth_arc: "受压→觉醒→反击→胜利"
+    
+  情感共鸣:
+    protagonist_traits: ["敏感", "善良", "成长"]
+    antagonist_traits: ["冷漠", "自私", "控制"]
+    emotional_core: "亲情守护"
+    growth_arc: "天真→受伤→成长→和解"
+    
+  悬疑烧脑:
+    protagonist_traits: ["敏锐", "执着", "理性"]
+    antagonist_traits: ["神秘", "狡猾", "偏执"]
+    emotional_core: "真相追求"
+    growth_arc: "困惑→探索→发现→解决"
+    
+  甜宠治愈:
+    protagonist_traits: ["纯真", "温暖", "坚强"]
+    antagonist_traits: ["误解", "偏见", "阻碍"]
+    emotional_core: "爱情追求"
+    growth_arc: "相遇→误会→甜蜜→承诺"
+    
+  科幻奇幻:
+    protagonist_traits: ["勇敢", "适应力", "创新"]
+    antagonist_traits: ["强大", "未知", "系统"]
+    emotional_core: "生存挑战"
+    growth_arc: "普通→觉醒→抗争→新生"
+    
+# 数据预测设置
+prediction:
+  douyin_baselines:
+    retention_3s: 70    # 前3秒留存率基准
+    completion_rate: 60  # 完播率基准
+    engagement_rate: 10  # 互动率基准
+    share_rate: 5       # 分享率基准
+    
+  hongguo_baselines:
+    retention_3s: 65    # 前3秒留存率基准
+    completion_rate: 65  # 完播率基准
+    engagement_rate: 8   # 互动率基准
+    share_rate: 3       # 分享率基准
+    
+# 优化建议库
+optimization_suggestions:
+  - "加强前3秒视觉冲击"
+  - "增加中间段转折点"
+  - "优化结尾悬念设计"
+  - "强化人物情感线"
+  - "增加社交话题点"
+  - "调整节奏快慢"
+  - "丰富镜头语言"
+  - "加强台词金句"
+  - "优化情绪曲线"
+  - "增加互动引导"
+  
+# 人物名称库
+name_libraries:
+  chinese_surnames: ["李", "王", "张", "刘", "陈", "杨", "赵", "黄", "周", "吴"]
+  chinese_given_male: ["伟", "强", "磊", "军", "勇", "鹏", "超", "杰", "浩", "宇"]
+  chinese_given_female: ["静", "丽", "敏", "雪", "芳", "婷", "秀", "艳", "娟", "娜"]
+  modern_names: ["子轩", "梓涵", "浩然", "诗涵", "宇航", "欣怡", "俊杰", "雨泽", "梦琪", "明轩"]
+  
+# 职业库
+occupation_library:
+  modern: ["程序员", "设计师", "产品经理", "市场专员", "教师", "医生", "律师", "创业者", "自媒体", "投资人"]
+  traditional: ["作家", "画家", "音乐家", "厨师", "农民", "工人", "司机", "服务员", "销售", "行政"]
+  special: ["侦探", "特工", "科学家", "宇航员", "考古学家", "心理学家", "记者", "摄影师", "导游", "运动员"]
+  
+# 记忆点设计库
+memorable_traits:
+  visual: ["标志性笑容", "特殊发型", "独特穿搭", "纹身", "疤痕", "配饰"]
+  behavioral: ["口头禅", "特殊习惯", "标志性动作", "笑声", "走路姿势"]
+  personality: ["反差萌", "特殊技能", "隐藏身份", "神秘过去", "独特价值观"]
+  
+# 导出模板设置
+export_templates:
+  markdown:
+    include_sections: ["概述", "人物", "分镜", "预测", "建议"]
+    style: "github"  # github, typora, custom
+    include_toc: true
+    
+  json:
+    pretty_print: true
+    ensure_ascii: false
+    
+  yaml:
+    default_flow_style: false
+    
+# 日志设置
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "webdrama_creator.log"
+  max_size_mb: 10
+  backup_count: 5
+  
+# 高级功能（实验性）
+experimental:
+  use_ai_enhancement: false  # 使用AI增强生成
+  trend_analysis: false      # 趋势分析
+  competitor_analysis: false # 竞品分析
+  a_b_testing: false        # A/B测试模拟

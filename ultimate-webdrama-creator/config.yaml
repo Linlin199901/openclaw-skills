@@ -1,0 +1,264 @@
+# Ultimate Webdrama Creator 配置文件
+
+# 技能基本信息
+skill_info:
+  name: "ultimate-webdrama-creator"
+  version: "1.0.0"
+  description: "AI网剧分镜与爆款公式融合创作系统"
+  author: "OpenClaw Skills Team"
+  
+# 数据源配置
+data_sources:
+  # 融合数据源
+  ai_storyboard:
+    enabled: true
+    data_path: "./data/ai_storyboard_legacy/"
+    weight: 0.4
+    
+  viral_creator:
+    enabled: true
+    data_path: "./data/viral_creator_legacy/"
+    weight: 0.6
+    
+  # 实时数据源
+  realtime_data:
+    enabled: false  # 默认关闭，需要API密钥
+    sources:
+      - "douyin_trending"
+      - "hongguo_hot"
+      - "weibo_hotsearch"
+    update_interval: 3600  # 秒
+    
+# 平台优化配置
+platform_optimization:
+  # 抖音专属优化
+  douyin:
+    enabled: true
+    target_duration: 120  # 秒，1-2分钟
+    golden_times: [3, 5, 30]  # 重点优化时间点（秒）
+    optimization_focus:
+      - "retention_3s"  # 前3秒留存
+      - "completion_rate"  # 完播率
+      - "engagement_rate"  # 互动率
+    style: "fast_paced"  # 快节奏
+    
+  # 红果专属优化
+  hongguo:
+    enabled: true
+    target_duration: 180  # 秒，3分钟
+    golden_times: [5, 20, 90]  # 重点优化时间点（秒）
+    optimization_focus:
+      - "emotional_depth"  # 情感深度
+      - "completion_rate"  # 完播率
+      - "save_rate"  # 收藏率
+    style: "emotional_paced"  # 情感节奏
+    
+# 创作类型配置
+genre_config:
+  # 基础类型（来自ai-webdrama-storyboard）
+  basic_genres:
+    - "emotional"  # 情感
+    - "revenge"    # 逆袭
+    - "suspense"   # 悬疑
+    - "sweet"      # 甜宠
+    
+  # 扩展类型（来自viral-webdrama-creator）
+  extended_genres:
+    - "sci-fi"     # 科幻
+    - "fantasy"    # 奇幻
+    - "workplace"  # 职场
+    - "family"     # 家庭
+    
+  # 融合创作选项
+  fusion_options:
+    enabled: true
+    max_fusion_count: 3  # 最多融合3种类型
+    require_primary_genre: true
+    
+# 人物创作配置
+character_creation:
+  # 基础属性
+  basic_attributes:
+    - "name"
+    - "age"
+    - "gender"
+    - "occupation"
+    - "appearance"
+    
+  # 深度属性（viral增强）
+  deep_attributes:
+    - "personality_mbti"
+    - "growth_arc"
+    - "memorable_traits"
+    - "social_value"
+    - "platform_adaptation"
+    
+  # 成长弧线配置
+  growth_arc:
+    episodes: 5  # 默认5集弧线
+    stages: ["introduction", "challenge", "growth", "climax", "resolution"]
+    
+# 分镜优化配置
+storyboard_optimization:
+  # 时间规则
+  time_rules:
+    douyin:
+      segment_1: [0, 3]    # 视觉钩子
+      segment_2: [3, 10]   # 核心信息
+      segment_3: [10, 30]  # 情节推进
+      segment_4: [30, 60]  # 情绪高潮
+      segment_5: [60, 90]  # 信息补充
+      segment_6: [90, 120] # 悬念设置
+      
+    hongguo:
+      segment_1: [0, 5]     # 情感引入
+      segment_2: [5, 20]    # 关系建立
+      segment_3: [20, 45]   # 矛盾浮现
+      segment_4: [45, 90]   # 情感发展
+      segment_5: [90, 150]  # 情节推进
+      segment_6: [150, 180] # 情感升华
+    
+  # 情绪曲线
+  emotional_curve:
+    required: true
+    checkpoints_per_minute: 2  # 每分钟2个情绪检查点
+    allowed_emotions: ["joy", "sadness", "anger", "fear", "surprise", "anticipation"]
+    
+# 视觉风格配置
+visual_style:
+  # 色彩系统
+  color_palettes:
+    emotional: ["warm", "soft", "pastel"]
+    revenge: ["contrast", "dark_to_light", "saturated"]
+    suspense: ["cool", "desaturated", "high_contrast"]
+    sweet: ["bright", "warm", "vibrant"]
+    sci-fi: ["cool", "neon", "futuristic"]
+    
+  # 镜头语言
+  cinematography:
+    shot_types: ["close_up", "medium_shot", "wide_shot", "extreme_close_up"]
+    camera_movements: ["static", "pan", "tilt", "dolly", "handheld"]
+    lighting_styles: ["natural", "dramatic", "soft", "high_key", "low_key"]
+    
+# 数据预测配置
+data_prediction:
+  enabled: true
+  # 预测模型
+  models:
+    retention_3s: "logistic_regression"
+    completion_rate: "random_forest"
+    engagement_rate: "gradient_boosting"
+    viral_probability: "ensemble"
+    
+  # 训练数据
+  training_data:
+    min_samples: 1000
+    update_frequency: "weekly"
+    
+  # 置信区间
+  confidence_intervals:
+    retention_3s: 0.05  # 95%置信区间
+    completion_rate: 0.05
+    engagement_rate: 0.05
+    
+# A/B测试配置
+ab_testing:
+  enabled: true
+  # 测试变量
+  test_variables:
+    - "opening_hook"
+    - "emotional_curve"
+    - "cliffhanger"
+    - "character_introduction"
+    
+  # 测试参数
+  parameters:
+    variants: 3
+    sample_size: 1000
+    significance_level: 0.05
+    duration_days: 7
+    
+# 导出配置
+export_config:
+  # 格式选项
+  formats:
+    douyin_optimized:
+      include: ["storyboard", "dialogue", "visual_notes", "data_report"]
+      file_type: "markdown"
+      
+    hongguo_depth:
+      include: ["storyboard", "dialogue", "character_analysis", "emotional_map"]
+      file_type: "markdown"
+      
+    full_package:
+      include: ["all"]
+      file_type: "zip"
+      
+    data_report:
+      include: ["predictions", "ab_test_results", "optimization_suggestions"]
+      file_type: "pdf"
+      
+  # 输出目录
+  output_directories:
+    base: "./output/"
+    by_project: true
+    by_date: true
+    
+# 性能配置
+performance:
+  # 资源限制
+  resource_limits:
+    max_memory_mb: 4096
+    max_processing_time: 300  # 秒
+    
+  # 缓存配置
+  caching:
+    enabled: true
+    cache_dir: "./cache/"
+    ttl_hours: 24
+    
+  # 日志配置
+  logging:
+    level: "INFO"
+    file: "./logs/ultimate_creator.log"
+    max_size_mb: 100
+    
+# API配置（可选）
+api_integration:
+  openai:
+    enabled: false
+    api_key: ""
+    model: "gpt-4"
+    
+  anthropic:
+    enabled: false
+    api_key: ""
+    model: "claude-3-opus"
+    
+  # 自定义API
+  custom_apis: []
+  
+# 高级功能
+advanced_features:
+  # 实时学习
+  realtime_learning:
+    enabled: false
+    feedback_sources: ["platform_analytics", "user_comments", "engagement_data"]
+    
+  # 团队协作
+  team_collaboration:
+    enabled: false
+    roles: ["writer", "director", "cinematographer", "editor", "producer"]
+    
+  # 版本控制
+  version_control:
+    enabled: false
+    system: "git"
+    auto_commit: true
+    
+# 调试和开发
+debug:
+  enabled: false
+  verbose_output: false
+  save_intermediate: false
+  test_mode: false
