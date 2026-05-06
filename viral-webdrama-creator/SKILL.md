@@ -1,3 +1,9 @@
+---
+name: viral-webdrama-creator
+version: "1.0.0"
+description: 爆款网剧创作技能。针对抖音、红果等短视频平台，基于市场数据、平台算法和用户心理，提供爆款网剧创作方案，特别优化前3秒留存率、完播率和互动率。
+---
+
 # Viral Webdrama Creator Skill (爆款网剧创作大师)
 
 ## 技能概述

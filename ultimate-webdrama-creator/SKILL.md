@@ -1,3 +1,9 @@
+---
+name: ultimate-webdrama-creator
+version: "1.0.0"
+description: 终极网剧创作大师Skill。融合市场分析、创意生成、人物设计、故事结构、分镜优化、数据预测等八大模块，提供从创意到分镜的完整网剧创作解决方案。
+---
+
 # Ultimate Webdrama Creator Skill
 ## 终极网剧创作大师 - 融合AI分镜与爆款公式
 
